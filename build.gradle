@@ -1,0 +1,59 @@
+plugins {
+	id "com.diffplug.spotless" version "5.12.5"
+	id "io.freefair.lombok" version "6.0.0-m2"
+	id 'java'
+	id 'io.quarkus'
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+spotless {
+	// Format (.gradle, .md)
+	format 'misc', {
+		target '*.gradle', '*.md'
+		indentWithTabs(2)
+		trimTrailingWhitespace()
+		endWithNewline()
+	}
+
+	// Format all .java
+	java {
+		importOrder('java', 'javax', '')
+		indentWithTabs(2)
+		removeUnusedImports()
+		trimTrailingWhitespace()
+		endWithNewline()
+		replaceRegex 'Remove empty lines before end of block', '\\n[\\n]+(\\s*})(?=\\n)', '\n$1'
+		replaceRegex 'Remove trailing empty comment lines.', '\n\\s*\\*(\n\\s*\\*/\n)', '$1'
+	}
+}
+
+dependencies {
+	implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+	implementation 'io.quarkus:quarkus-smallrye-openapi'
+	implementation 'io.quarkus:quarkus-spring-data-jpa'
+	implementation 'io.quarkus:quarkus-arc'
+	implementation 'io.quarkus:quarkus-resteasy'
+	testImplementation 'io.quarkus:quarkus-junit5'
+	testImplementation 'io.rest-assured:rest-assured'
+}
+
+group 'br.unisinos.arquitetura.t4'
+version '1.0.0-SNAPSHOT'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_11
+	targetCompatibility = JavaVersion.VERSION_11
+}
+
+compileJava {
+	options.encoding = 'UTF-8'
+	options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+	options.encoding = 'UTF-8'
+}
