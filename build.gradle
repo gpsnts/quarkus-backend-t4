@@ -33,14 +33,15 @@ spotless {
 
 dependencies {
 	implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
-  implementation 'io.quarkus:quarkus-smallrye-jwt'
-  implementation 'io.quarkus:quarkus-smallrye-jwt-build'
-	implementation 'io.quarkus:quarkus-smallrye-openapi'
-	implementation 'io.quarkus:quarkus-spring-data-jpa'
 	implementation 'io.quarkus:quarkus-arc'
+	implementation 'io.quarkus:quarkus-container-image-jib'
 	implementation 'io.quarkus:quarkus-resteasy'
 	implementation 'io.quarkus:quarkus-resteasy-jackson'
-	
+	implementation 'io.quarkus:quarkus-smallrye-jwt'
+	implementation 'io.quarkus:quarkus-smallrye-jwt-build'
+	implementation 'io.quarkus:quarkus-smallrye-openapi'
+	implementation 'io.quarkus:quarkus-spring-data-jpa'
+
 	testImplementation 'io.quarkus:quarkus-junit5'
 	testImplementation 'io.rest-assured:rest-assured'
 }
