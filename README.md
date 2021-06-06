@@ -4,12 +4,18 @@
 
 Esse projeto, graças à GraalVM, compila para código nativo. Dessa forma, mesmo sendo em Java, tem praticamente a mesma performance que um aplicação em C
 
-## Docker
+## Depts
 
-As instruções estão em nosso Dockerfile. Antes de rodá-las, **execute**:
+* Docker
+* GraalVM
+* Heroku CLI
+
+## Docker e Deployments
+
+As instruções estão em nosso Dockerfile. Para rodar tudo de forma mais "açucarada", **execute**:
 
 ``` shell script
-./gradlew build
+./deploy_docker 
 ```
 
 ## Rodar localmente

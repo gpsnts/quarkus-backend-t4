@@ -1,0 +1,10 @@
+#!/bin/sh
+./gradlew build;
+docker build . -t quarkus/quarkus-backend-t4;
+
+heroku login;
+heroku container:login;
+
+docker tag quarkus/quarkus-backend-t4 registry.heroku.com/quarkus-back-t4-native/web;
+docker push registry.heroku.com/quarkus-back-t4-native/web;
+heroku container:release web -a quarkus-back-t4-native;
