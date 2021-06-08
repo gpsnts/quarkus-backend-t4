@@ -15,7 +15,7 @@ Esse projeto, graças à GraalVM, compila para código nativo. Dessa forma, mesm
 As instruções estão em nosso Dockerfile. Para rodar tudo de forma mais "açucarada", **execute**:
 
 ``` shell script
-./deploy_docker 
+./deploy_docker
 ```
 
 ## Rodar localmente
