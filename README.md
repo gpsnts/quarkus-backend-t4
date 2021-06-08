@@ -4,6 +4,12 @@
 
 Esse projeto, graças à GraalVM, compila para código nativo. Dessa forma, mesmo sendo em Java, tem praticamente a mesma performance que um aplicação em C
 
+* Setar para os hooks de pre-commit
+
+``` shell script
+git config core.hooksPath hooks/
+```
+
 ## Depts
 
 * Docker
