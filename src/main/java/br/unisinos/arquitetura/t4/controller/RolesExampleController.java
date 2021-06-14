@@ -33,4 +33,5 @@ public class RolesExampleController {
 	public Response userOrAdmin() {
 		return Response.ok(new Message("Content for user or admin")).build();
 	}
+
 }

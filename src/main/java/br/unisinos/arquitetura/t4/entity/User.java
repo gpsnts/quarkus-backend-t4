@@ -1,28 +1,53 @@
 package br.unisinos.arquitetura.t4.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
-import javax.management.relation.Role;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@EqualsAndHashCode(callSuper = false)
-@ToString
-public class User extends PanacheEntity 
-{
-	private String username, password;
+@Data
+@Entity
+@Table(name = "\"user\"")
+@Access(AccessType.FIELD)
+public class User implements Serializable {
+	@Transient
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(nullable = false)
+	private String username;
+
+	@Column(nullable = false)
+	private String password;
+
+	@ElementCollection(targetClass = Role.class)
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "\"user_id\""))
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, updatable = false)
 	private Set<Role> roles;
-	
-	// Add service layer
-	public static User findByUsername(String username) {
-		return find("username", username).firstResult();
-	}
 }

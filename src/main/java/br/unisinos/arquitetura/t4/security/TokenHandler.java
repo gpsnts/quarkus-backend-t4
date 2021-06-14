@@ -8,8 +8,7 @@ import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.management.relation.Role;
-
+import br.unisinos.arquitetura.t4.entity.Role;
 import io.smallrye.jwt.build.Jwt;
 import io.smallrye.jwt.build.JwtClaimsBuilder;
 
