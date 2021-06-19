@@ -32,6 +32,8 @@ spotless {
 }
 
 dependencies {
+    implementation 'io.quarkus:quarkus-hibernate-orm-rest-data-panache'
+    implementation 'io.quarkus:quarkus-jdbc-postgresql'
 	implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
 	implementation 'io.quarkus:quarkus-arc'
 	implementation 'io.quarkus:quarkus-container-image-jib'
