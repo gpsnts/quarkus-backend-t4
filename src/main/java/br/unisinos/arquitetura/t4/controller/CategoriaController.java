@@ -51,14 +51,6 @@ public class CategoriaController {
             throw new WebApplicationException("Categoria with id of " + id + " does not exist.", 404);
         }
 
-        // Produto produto = Produto.findById(entity.getProduto().getId());
-
-        // if (produto == null) {
-        // throw new WebApplicationException("Produto with id of " +
-        // entity.getProduto().getId() + " does not exist.",
-        // 404);
-        // }
-
         return entity;
     }
 
