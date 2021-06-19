@@ -31,4 +31,8 @@ public class Estoque extends PanacheEntity {
     public void setSku(String sku) {
         this.sku = sku;
     }
+
+    public Long getId() {
+        return this.id;
+    }
 }
