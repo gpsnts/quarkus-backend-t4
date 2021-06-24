@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 
 import br.unisinos.arquitetura.t4.entity.Role;
 import br.unisinos.arquitetura.t4.entity.User;
-import br.unisinos.arquitetura.t4.utils.ArgonHashing;
+import br.unisinos.arquitetura.t4.security.ArgonHashing;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 @ApplicationScoped
