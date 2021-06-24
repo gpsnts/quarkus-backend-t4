@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @Builder
 public class JWTResponse {
-    String access_token;
-    String exp;
-    String parsed;
-    String foo;
+		String access_token;
+		String exp;
+		String parsed;
+		String foo;
 }
