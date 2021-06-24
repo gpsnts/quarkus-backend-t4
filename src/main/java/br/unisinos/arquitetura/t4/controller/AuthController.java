@@ -2,6 +2,7 @@ package br.unisinos.arquitetura.t4.controller;
 
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

@@ -50,6 +50,7 @@ dependencies {
 	implementation "io.quarkus:quarkus-smallrye-openapi"
 	implementation "io.quarkus:quarkus-security-jpa"
 	implementation "io.quarkus:quarkus-spring-data-jpa"
+	implementation "io.quarkus:quarkus-hibernate-orm-rest-data-panache"
 
 	implementation "io.jsonwebtoken:jjwt-api:${JJWT_LIB_VERSION}"
 	implementation "io.jsonwebtoken:jjwt-impl:${JJWT_LIB_VERSION}"

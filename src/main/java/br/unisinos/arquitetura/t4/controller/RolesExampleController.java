@@ -17,7 +17,7 @@ public class RolesExampleController {
 	@GET
 	@Path("/user")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response user() {
+	public Response user(@HeaderParam("Authorization") String authorization) {
 		return Response.ok(new Message("Content for user")).build();
 	}
 	
@@ -25,14 +25,14 @@ public class RolesExampleController {
 	@GET
 	@Path("/admin")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response admin() {
+	public Response admin(@HeaderParam("Authorization") String authorization) {
 		return Response.ok(new Message("Content for admin")).build();
 	}
 	
 	@RolesAllowed({"USER", "ADMIN"})
 	@GET @Path("/user-or-admin")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response userOrAdmin() {
+	public Response userOrAdmin(@HeaderParam("Authorization") String authorization) {
 		return Response.ok(new Message("Content for user or admin")).build();
 	}
 }
