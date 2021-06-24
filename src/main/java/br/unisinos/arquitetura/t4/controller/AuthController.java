@@ -9,15 +9,25 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import br.unisinos.arquitetura.t4.dto.response.standard.JWTResponse;
+import br.unisinos.arquitetura.t4.security.JWTUtil;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import br.unisinos.arquitetura.t4.dto.request.AuthRequest;
 import br.unisinos.arquitetura.t4.dto.response.AuthResponse;
+import br.unisinos.arquitetura.t4.dto.response.standard.MessageResponseBody;
 import br.unisinos.arquitetura.t4.entity.User;
 import br.unisinos.arquitetura.t4.repository.UserRepository;
 import br.unisinos.arquitetura.t4.security.EncodingHandler;
 import br.unisinos.arquitetura.t4.security.TokenHandler;
+import br.unisinos.arquitetura.t4.utils.ArgonHashing;
+import lombok.extern.slf4j.Slf4j;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+
+@Slf4j
 @Path("/auth")
 public class AuthController {
 	@Inject
@@ -34,25 +44,37 @@ public class AuthController {
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(AuthRequest req) {
-		User user = userRepository.findByUsername(req.getPassword());
+		User user = userRepository.findByUsername(req.getUsername());
 
-		boolean existingUser = user.getPassword().equals(
-			encodingHandler.encode(req.getPassword())
-		);
+		if (user == null) return Response.status(404).entity(
+			MessageResponseBody.builder()
+				.message("Usuário não cadastrado")
+			.build()
+		).build();
 
-		if (user != null && existingUser) {
+		String inputPassword = req.getPassword();
+		boolean validUser = ArgonHashing.getInstance().verify(user.getPassword(), inputPassword.toCharArray());
+
+		if (validUser) {
 			try {
-				return Response.ok(
-					new AuthResponse(
-						TokenHandler.generateToken(user.getUsername(), user.getRoles(), duration, issuer)
-					)
+				return Response.status(Status.OK).entity(
+						JWTResponse.builder()
+							.access_token(JWTUtil.createToken(user.getUsername(), user.getRoles(), duration, issuer))
+							.exp(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(Date.from(Instant.now().plusSeconds(600L))))
+						.build()
 				).build();
 			} catch (Exception e) {
+				e.printStackTrace();
 				return Response.status(Status.UNAUTHORIZED).build();
 			}
 		}
+
 		else {
-			return Response.status(Status.NOT_FOUND).build();
+			return Response.status(404).entity(
+				MessageResponseBody.builder()
+					.message("Usuário ou senha inválidos")
+				.build()
+			).build();
 		}
 	}
 }

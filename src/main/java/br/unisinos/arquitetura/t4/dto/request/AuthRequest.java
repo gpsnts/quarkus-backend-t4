@@ -1,16 +1,14 @@
 package br.unisinos.arquitetura.t4.dto.request;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@ToString
-@EqualsAndHashCode
+@NoArgsConstructor
+@Data
+@Builder
 public class AuthRequest {
 	private String username, password;	
 }

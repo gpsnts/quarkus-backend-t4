@@ -1,8 +1,8 @@
 plugins {
 	id "com.diffplug.spotless" version "5.12.5"
 	id "io.freefair.lombok" version "6.0.0-m2"
-	id 'java'
-	id 'io.quarkus'
+	id "java"
+	id "io.quarkus"
 }
 
 repositories {
@@ -12,8 +12,8 @@ repositories {
 
 spotless {
 	// Format (.gradle, .md)
-	format 'misc', {
-		target '*.gradle', '*.md'
+	format "misc", {
+		target "*.gradle", "*.md"
 		indentWithTabs(2)
 		trimTrailingWhitespace()
 		endWithNewline()
@@ -21,30 +21,40 @@ spotless {
 
 	// Format all .java
 	java {
-		importOrder('java', 'javax', '')
+		importOrder("java", "javax", "")
 		indentWithTabs(2)
 		removeUnusedImports()
 		trimTrailingWhitespace()
 		endWithNewline()
-		replaceRegex 'Remove empty lines before end of block', '\\n[\\n]+(\\s*})(?=\\n)', '\n$1'
-		replaceRegex 'Remove trailing empty comment lines.', '\n\\s*\\*(\n\\s*\\*/\n)', '$1'
+		replaceRegex "Remove empty lines before end of block", '\\n[\\n]+(\\s*})(?=\\n)', '\n$1'
+		replaceRegex "Remove trailing empty comment lines.", '\n\\s*\\*(\n\\s*\\*/\n)', '$1'
 	}
+}
+
+ext {
+	set("ARGON2_HASHING_LIB_VERSION", "2.10.1")
+	set("JJWT_LIB_VERSION", "0.11.2")
 }
 
 dependencies {
 	implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
-	implementation 'io.quarkus:quarkus-arc'
-	implementation 'io.quarkus:quarkus-container-image-jib'
-	implementation 'io.quarkus:quarkus-hibernate-orm-panache'
-	implementation 'io.quarkus:quarkus-jdbc-postgresql'
-	implementation 'io.quarkus:quarkus-reactive-pg-client'
-	implementation 'io.quarkus:quarkus-resteasy'
-	implementation 'io.quarkus:quarkus-resteasy-jackson'
-	implementation 'io.quarkus:quarkus-smallrye-jwt'
-	implementation 'io.quarkus:quarkus-smallrye-jwt-build'
-	implementation 'io.quarkus:quarkus-smallrye-openapi'
-	implementation 'io.quarkus:quarkus-security-jpa'
-	implementation 'io.quarkus:quarkus-spring-data-jpa'
+	implementation "io.quarkus:quarkus-arc"
+	implementation "io.quarkus:quarkus-container-image-jib"
+	implementation "io.quarkus:quarkus-hibernate-orm-panache"
+	implementation "io.quarkus:quarkus-jdbc-postgresql"
+	implementation "io.quarkus:quarkus-reactive-pg-client"
+	implementation "io.quarkus:quarkus-resteasy"
+	implementation "io.quarkus:quarkus-resteasy-jackson"
+	implementation "io.quarkus:quarkus-smallrye-jwt"
+	implementation "io.quarkus:quarkus-smallrye-jwt-build"
+	implementation "io.quarkus:quarkus-smallrye-openapi"
+	implementation "io.quarkus:quarkus-security-jpa"
+	implementation "io.quarkus:quarkus-spring-data-jpa"
+
+	implementation "io.jsonwebtoken:jjwt-api:${JJWT_LIB_VERSION}"
+	implementation "io.jsonwebtoken:jjwt-impl:${JJWT_LIB_VERSION}"
+	implementation "io.jsonwebtoken:jjwt-jackson:${JJWT_LIB_VERSION}"
+	implementation "de.mkammerer:argon2-jvm-nolibs:${ARGON2_HASHING_LIB_VERSION}"
 
 	testImplementation 'io.quarkus:quarkus-junit5'
 	testImplementation 'io.rest-assured:rest-assured'

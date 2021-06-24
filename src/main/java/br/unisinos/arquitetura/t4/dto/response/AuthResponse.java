@@ -1,14 +1,14 @@
 package br.unisinos.arquitetura.t4.dto.response;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Data
+@Builder
 public class AuthResponse {
 	public String token;
 }
