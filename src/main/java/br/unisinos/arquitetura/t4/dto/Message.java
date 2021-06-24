@@ -10,5 +10,5 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class Message {
-	public String content;	
+	public String content;
 }
