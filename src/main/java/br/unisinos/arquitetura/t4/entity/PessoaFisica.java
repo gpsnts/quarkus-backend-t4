@@ -12,7 +12,9 @@ import javax.persistence.OneToOne;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
-public class Pedido extends PanacheEntity {
+public class PessoaFisica extends PanacheEntity {
+
+    private String cpf;
 
     @OneToOne()
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
@@ -20,6 +22,14 @@ public class Pedido extends PanacheEntity {
 
     public Long getId() {
         return this.id;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public Pessoa getPessoa() {

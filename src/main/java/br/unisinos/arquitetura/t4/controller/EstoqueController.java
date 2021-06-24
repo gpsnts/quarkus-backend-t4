@@ -74,10 +74,28 @@ public class EstoqueController {
         if (produto == null) {
             throw new WebApplicationException("Produto inválido.", 422);
         }
+        String sku = "sku-" + String.valueOf(hashCode());
 
+        estoque.setSku(sku);
         estoque.setProduto(produto);
         estoque.persist();
 
         return Response.ok(estoque).status(201).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Transactional
+    public Response detSingle(@PathParam Long id) {
+
+        Estoque entity = Estoque.findById(id);
+
+        if (entity == null) {
+            throw new WebApplicationException("Produto não encontrado no estoque.", 404);
+        }
+
+        Estoque.deleteById(id);
+
+        return Response.ok(entity).status(200).build();
     }
 }

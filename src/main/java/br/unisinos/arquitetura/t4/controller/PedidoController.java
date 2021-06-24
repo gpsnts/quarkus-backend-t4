@@ -21,6 +21,7 @@ import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import br.unisinos.arquitetura.t4.entity.Pedido;
+import br.unisinos.arquitetura.t4.entity.Pessoa;
 import br.unisinos.arquitetura.t4.entity.Produto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,6 +51,10 @@ public class PedidoController {
         if (entity == null) {
             throw new WebApplicationException("Pedido with id of " + id + " does not exist.", 404);
         }
+
+        Pessoa pessoa = Pessoa.findById(entity.getPessoa().getId());
+
+        entity.setPessoa(pessoa);
 
         return entity;
     }

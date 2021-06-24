@@ -83,6 +83,44 @@ public class ProdutoController {
         return Response.ok(produto).status(201).build();
     }
 
+    @PUT
+    @Path("{id}")
+    @Transactional
+    public Response update(@PathParam Long id, Produto produto_request) {
+
+        Produto produto = Produto.findById(id);
+
+        if (produto == null) {
+            throw new WebApplicationException("Id was invalidly set on request.", 422);
+        }
+
+        Set<Categoria> categorias_body = produto_request.getCategorias();
+
+        produto.setCategorias(new HashSet<>());
+
+        for (Categoria categoria_aux : categorias_body) {
+
+            Categoria categoria = Categoria.findById(categoria_aux.getId());
+
+            if (categoria == null) {
+                continue;
+            }
+
+            produto.addCategoria(categoria);
+        }
+
+        if (!produto.isPersistent()) {
+            throw new WebApplicationException("Produto inválido.", 422);
+        }
+
+        produto.setName(produto_request.getName());
+        produto.setDescription(produto_request.getDescription());
+        produto.setValor(produto_request.getValor());
+        produto.persist();
+
+        return Response.ok(produto).status(201).build();
+    }
+
     @Provider
     public static class ErrorMapper implements ExceptionMapper<Exception> {
 

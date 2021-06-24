@@ -10,7 +10,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 @Entity
 public class Estoque extends PanacheEntity {
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "produto_id", referencedColumnName = "id")
     private Produto produto;
 

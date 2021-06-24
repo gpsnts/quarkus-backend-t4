@@ -29,6 +29,16 @@ public class Produto extends PanacheEntity {
 			@JoinColumn(name = "categoria_id") })
 	Set<Categoria> categorias = new HashSet<>();
 
+	private Double valor;
+
+	public Double getValor() {
+		return this.valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
 	public Set<Categoria> getCategorias() {
 		return this.categorias;
 	}
