@@ -30,7 +30,7 @@ public class UserRepository implements PanacheRepository<User> {
 								.collect(Collectors.toSet()))
 			)
 		.build();
-
+		
 		user.persist();
 	}
 }

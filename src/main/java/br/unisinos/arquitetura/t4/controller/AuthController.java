@@ -9,15 +9,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import br.unisinos.arquitetura.t4.security.TokenUtils;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
 import br.unisinos.arquitetura.t4.dto.request.AuthRequest;
 import br.unisinos.arquitetura.t4.dto.response.AuthResponse;
 import br.unisinos.arquitetura.t4.dto.response.standard.MessageResponseBody;
 import br.unisinos.arquitetura.t4.entity.User;
 import br.unisinos.arquitetura.t4.repository.UserRepository;
 import br.unisinos.arquitetura.t4.security.ArgonHashing;
-import br.unisinos.arquitetura.t4.security.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @Slf4j
 @Path("/auth")
